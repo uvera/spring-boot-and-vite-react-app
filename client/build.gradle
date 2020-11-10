@@ -1,0 +1,9 @@
+plugins {
+    id "com.github.node-gradle.node" version "2.2.4"
+}
+
+task build(type: NpmTask, dependsOn : 'npmInstall') {
+    group = 'build'
+    description = 'Build the client bundle'
+    args = ['run', 'build']
+}

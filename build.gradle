@@ -1,0 +1,27 @@
+task copyClientResources(dependsOn: ':client:build') { 
+    group = 'build'
+    description = 'Copy client resources into server'
+    doLast {
+        copy {
+            from "client/dist"
+            into "${project(':server').buildDir}/resources/main/static/"
+       } 
+    }
+}
+
+task assembleJar(dependsOn: ['copyClientResources', ':server:assemble']) { 
+    group = 'build'
+    description = 'Build combined server & client JAR'
+    doLast {
+        copy {
+            from "${project(':server').buildDir}/libs"
+            into buildDir
+        } 
+    }    
+}
+
+task runServer(dependsOn: ['copyClientResources', ':server:run']) {
+    group = 'build'
+    description = 'Run server with compiled client'
+}
+
