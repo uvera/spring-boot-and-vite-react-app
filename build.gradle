@@ -20,7 +20,7 @@ task assembleJar(dependsOn: ['copyClientResources', ':server:assemble']) {
     }    
 }
 
-task runServer(dependsOn: ['copyClientResources', ':server:run']) {
+task runServer(dependsOn: ['copyClientResources', ':server:bootRun']) {
     group = 'build'
     description = 'Run server with compiled client'
 }
